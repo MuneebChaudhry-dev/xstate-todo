@@ -2,9 +2,10 @@
 import React from 'react';
 import { useMachine } from '@xstate/react';
 import { myMachine } from '../../machines/myFirstMachine';
+import { todoMachine } from '../../machines/todoAppMachine';
 
 export default function Home() {
-  const [state, send] = useMachine(myMachine);
+  const [state, send] = useMachine(todoMachine);
 
   return (
     <div className='flex flex-col justify-center items-center w-full'>
@@ -14,20 +15,20 @@ export default function Home() {
 
       <div className='w-full flex justify-start'>
         <button
-          className='bg-blue-500 text-white px-4 py-2 rounded'
+          className='bg-green-500 text-white px-4 py-2 rounded'
           onClick={() => {
-            send('MOUSEOVER');
+            send('Todos Loaded');
           }}
         >
-          Over
+          Load Todo Success
         </button>
         <button
           className='bg-red-500 text-white px-4 py-2 rounded'
           onClick={() => {
-            send('MOUSEOUT');
+            send('Loading Todos Failed');
           }}
         >
-          Out
+          Load Todo Failed
         </button>
       </div>
     </div>
