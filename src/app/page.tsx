@@ -17,7 +17,10 @@ export default function Home() {
         <button
           className='bg-green-500 text-white px-4 py-2 rounded'
           onClick={() => {
-            send('Todos Loaded');
+            send({
+              type: 'Todos Loaded',
+              todos: ['Take Coffee'],
+            });
           }}
         >
           Load Todo Success
@@ -25,7 +28,10 @@ export default function Home() {
         <button
           className='bg-red-500 text-white px-4 py-2 rounded'
           onClick={() => {
-            send('Loading Todos Failed');
+            send({
+              type: 'Loading Todos Failed',
+              errorMessage: 'Oh Failed!',
+            });
           }}
         >
           Load Todo Failed
