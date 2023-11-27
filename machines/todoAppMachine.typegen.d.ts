@@ -3,10 +3,19 @@
 export interface Typegen0 {
   '@@xstate/typegen': true;
   internalEvents: {
+    'done.invoke.Todo Machine.Creating new todo.Saving todo:invocation[0]': {
+      type: 'done.invoke.Todo Machine.Creating new todo.Saving todo:invocation[0]';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
     'done.invoke.Todo Machine.Loading Todos:invocation[0]': {
       type: 'done.invoke.Todo Machine.Loading Todos:invocation[0]';
       data: unknown;
       __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'error.platform.Todo Machine.Creating new todo.Saving todo:invocation[0]': {
+      type: 'error.platform.Todo Machine.Creating new todo.Saving todo:invocation[0]';
+      data: unknown;
     };
     'error.platform.Todo Machine.Loading Todos:invocation[0]': {
       type: 'error.platform.Todo Machine.Loading Todos:invocation[0]';
@@ -16,22 +25,36 @@ export interface Typegen0 {
   };
   invokeSrcNameMap: {
     loadTodos: 'done.invoke.Todo Machine.Loading Todos:invocation[0]';
+    saveTodo: 'done.invoke.Todo Machine.Creating new todo.Saving todo:invocation[0]';
   };
   missingImplementations: {
     actions: never;
     delays: never;
     guards: never;
-    services: 'loadTodos';
+    services: 'loadTodos' | 'saveTodo';
   };
   eventsCausingActions: {
-    assignErrorToContext: 'error.platform.Todo Machine.Loading Todos:invocation[0]';
+    assignErrorToContext:
+      | 'error.platform.Todo Machine.Creating new todo.Saving todo:invocation[0]'
+      | 'error.platform.Todo Machine.Loading Todos:invocation[0]';
+    assignFormInputContext: 'Form input changed';
     assignTodoToContext: 'done.invoke.Todo Machine.Loading Todos:invocation[0]';
   };
   eventsCausingDelays: {};
   eventsCausingGuards: {};
   eventsCausingServices: {
-    loadTodos: 'xstate.init';
+    loadTodos:
+      | 'done.invoke.Todo Machine.Creating new todo.Saving todo:invocation[0]'
+      | 'xstate.init';
+    saveTodo: 'Submit';
   };
-  matchesStates: 'Loaded Todos' | 'Loading Todos' | 'Loading Todos Error';
+  matchesStates:
+    | 'Creating new todo'
+    | 'Creating new todo.Saving todo'
+    | 'Creating new todo.Showing form input'
+    | 'Loaded Todos'
+    | 'Loading Todos'
+    | 'Loading Todos Error'
+    | { 'Creating new todo'?: 'Saving todo' | 'Showing form input' };
   tags: never;
 }
