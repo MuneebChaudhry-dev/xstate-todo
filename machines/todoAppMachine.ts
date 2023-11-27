@@ -1,36 +1,63 @@
-import { createMachine } from 'xstate';
+import { createMachine, assign } from 'xstate';
 
-export const todoMachine = createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQAyquEZUmaGsAxBuRWQG6oDWlZljxEylGnQZN0qWAh6p8uAC7FUpANoAGALradiUAAdZxVesMgAHogCMAVgq3bWgJz33AFlsA2ABw+AOz2AMwANCAAnnY+FJ7xAEzB9rYJWj4hSX4AvtkRQjgEJJwS9KSMQmxgAE7VqNUURgA2KgBm9QC2FAUixeK0ZRUycgpK5pq6+pYmsGZqpJY2CAC0toEJFOue7ikJ9p5aqRHRCLbuFCFaVwm2B36uWn62uXkgpOhwlj1FYtOm44tEMsEpkKAkfD5vPYEq5PH44SFPMcgX5HL5Qn5wVdAp4kj5cvkZIVRCUBlJKn9ZgCkNYgbZ4WCIVCYXCEUioogNrZET4zsFAtzApdnq9viT+nRINIWJS5hYaUsEjcKND7PYrn5Aq4-I8gsjTp4VYlIT51TrNSERYSMMS+tQyeVpbJMABRWr1WXU0BLVZBMHbWEBLTxbk+fUJBkuK7OEKuQL3LT2QIvbJAA */
-  states: {
-    'Loading Todos': {
-      invoke: {
-        src: 'loadTodos',
+export const todoMachine = createMachine(
+  {
+    /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQAyquEZUmaGsAxBuRWQG6oDWlZljxEylGnQZN0qWAh6p8uAC7FUpANoAGALradiUAAdZxVesMgAHogBMAZnsVbATlcBGWwBYvt9+-stAFYAGhAAT0QAWgcKAHYte38ANncglyD7FxcvIIBfPLChHAISTgl6UkYhNjAAJzrUOoojABsVADMmgFsKYpEy8VpK6pk5BSVzTV19SxNYMzVSSxsEbxcKVIcM2z9PONswyLXkrQp3AA5kxz8vLRytOPyCsNJ0OEt+0rE50ymV6LJI7RfzuChaRKeXKXU4XewvEBfUTlYZSGq-Bb-JDWRC+YEIFxOIJedzJOKnPyuZI+BFIwbUYaQaQsDGLCzY1ZeanOQnk7Jc64XFz4i5xCguLQXdLJK4ZCUXdy0mQlZFDSRVZmyTAAUQaTVZWNAnN8FCCniCu3sdwC6Xx7gy4KeEMJWm8MouBQKQA */
+    states: {
+      'Loading Todos': {
+        invoke: {
+          src: 'loadTodos',
 
-        onDone: {
-          target: 'Loaded Todos',
+          onDone: {
+            actions: 'assignTodoToContext',
+            target: 'Loaded Todos',
+          },
+
+          onError: {
+            target: 'Loading Todos Error',
+            actions: 'assignErrorToContext',
+          },
         },
+      },
 
-        onError: '#Todo Machine.Loading Todos Error',
+      'Loaded Todos': {},
+      'Loading Todos Error': {},
+    },
+
+    initial: 'Loading Todos',
+    id: 'Todo Machine',
+    schema: {
+      services: {} as {
+        loadTodos: {
+          data: string[];
+        };
       },
     },
-
-    'Loaded Todos': {},
-    'Loading Todos Error': {},
-  },
-
-  initial: 'Loading Todos',
-  id: 'Todo Machine',
-  schema: {
-    // events: {} as
-    //   | { type: 'Todos Loaded'; todos: string[] }
-    //   | { type: 'Loading Todos Failed'; errorMessage: string },
-    services: {} as {
-      loadTodos: {
-        data: string[];
-      };
+    context: {
+      todo: [] as string[], //initial kind of context
+      errorMessage: undefined as string | undefined,
     },
+
+    tsTypes: {} as import('./todoAppMachine.typegen.d.ts').Typegen0,
   },
-  tsTypes: {} as import('./todoAppMachine.typegen.d.ts').Typegen0,
-});
+  {
+    actions: {
+      assignTodoToContext: assign((context, event) => {
+        return {
+          todo: event.data,
+        };
+      }),
+      assignErrorToContext: assign((context, event) => {
+        return {
+          errorMessage: (event.data as Error).message,
+        };
+      }),
+    },
+  }
+);
+
 //Actions are mostly used for sync or short term taask and Services are used for long term or  Async Operations
+
+//Context is used to save the information to our Machine, Context is an object and it is like a key value store ,which stores any thing you need to store in your machine
+
+//Assign is used to asign the values to context

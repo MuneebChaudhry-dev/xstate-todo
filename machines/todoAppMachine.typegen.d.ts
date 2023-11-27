@@ -3,6 +3,15 @@
 export interface Typegen0 {
   '@@xstate/typegen': true;
   internalEvents: {
+    'done.invoke.Todo Machine.Loading Todos:invocation[0]': {
+      type: 'done.invoke.Todo Machine.Loading Todos:invocation[0]';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'error.platform.Todo Machine.Loading Todos:invocation[0]': {
+      type: 'error.platform.Todo Machine.Loading Todos:invocation[0]';
+      data: unknown;
+    };
     'xstate.init': { type: 'xstate.init' };
   };
   invokeSrcNameMap: {
@@ -14,7 +23,10 @@ export interface Typegen0 {
     guards: never;
     services: 'loadTodos';
   };
-  eventsCausingActions: {};
+  eventsCausingActions: {
+    assignErrorToContext: 'error.platform.Todo Machine.Loading Todos:invocation[0]';
+    assignTodoToContext: 'done.invoke.Todo Machine.Loading Todos:invocation[0]';
+  };
   eventsCausingDelays: {};
   eventsCausingGuards: {};
   eventsCausingServices: {
