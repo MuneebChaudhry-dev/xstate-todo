@@ -5,7 +5,14 @@ import { myMachine } from '../../machines/myFirstMachine';
 import { todoMachine } from '../../machines/todoAppMachine';
 
 export default function Home() {
-  const [state, send] = useMachine(todoMachine);
+  const [state, send] = useMachine(todoMachine, {
+    services: {
+      loadTodos: async () => {
+        throw Error('Ohh No');
+        return ['Take Coffee', 'Do Task Login Task', 'Attend Meeting'];
+      },
+    },
+  });
 
   return (
     <div className='flex flex-col justify-center items-center w-full'>
