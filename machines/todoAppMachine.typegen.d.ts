@@ -22,9 +22,16 @@ export interface Typegen0 {
       type: 'error.platform.Todo Machine.Creating new todo.Saving todo:invocation[0]';
       data: unknown;
     };
+    'error.platform.Todo Machine.Deleting Todo:invocation[0]': {
+      type: 'error.platform.Todo Machine.Deleting Todo:invocation[0]';
+      data: unknown;
+    };
     'error.platform.Todo Machine.Loading Todos:invocation[0]': {
       type: 'error.platform.Todo Machine.Loading Todos:invocation[0]';
       data: unknown;
+    };
+    'xstate.after(2500)#Todo Machine.Deleting todo Errored': {
+      type: 'xstate.after(2500)#Todo Machine.Deleting todo Errored';
     };
     'xstate.init': { type: 'xstate.init' };
   };
