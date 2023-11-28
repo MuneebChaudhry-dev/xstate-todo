@@ -3,16 +3,20 @@ import { type } from 'os';
 
 export const todoMachine = createMachine(
   {
-    /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQAyquEZUmaGsAxBuRWQG6oDWlZljxEylGnQZN0qWAh6p8uAC7FUpANoAGALradiUAAdZxVesMgAHogCMtgBwUAbACYA7FtsBmACyvbLQBOINcggBoQAE9EAFpfWwpvQJDvB1tnLQdfB2cAXzzIoRwCEk4JelJGITYwACc61DqKIwAbFQAzJoBbCmKRMvFaSuqZOQUlc01dfUsTWDM1UksbBFj3XxdXAJyc7w2HAFYI6LsgzddnBLStQ8Pnb29XBwKimRLRcuHIaRZWAGE6mAVGBMAA5MAAd1mSBA80WFlhq289woniCPi0D3cmUOvkiMQQtl8m2ch2Jt1chw8zgc3leIH6pTE1G+EF+slYABEwK0wMowDDjKYpitEIcHFokq5-GF-HjzrYCYhPGitFp3FSvJKPNkGUzPpRAcDVFVMORIZhlDIKABlQioSFSLp1bqYMhGACuylYADEeu7SF7lJgiLgqpAhXCRUsxQg3FKtL4gslbNsshtDsqEP5Eu4Mb5vM5nO5yVo0od9e8BizjSopBarTb7Y7nQGPd7WLbPQAjbpmKPw0VI8VuCgeXwlhJaZ5J1zZw7udwUdLUzW5IIODy2KsYD6DCh102MRvWjB23DcKRn1DsdSUBQCPrV5mcI8NqFN8+2y-XmTyUheEmJZ9EHGNEVAVYAkOFdXCyLc7lLCU02zfYnBJfYHiLXxgmcIJd2EV8jSBeszVPZtfzNG9WHqRpmjaToemfPcazfEjj3NT8bwvK8qP-CZ63UUDdDmcDlhHeNQiSCVJUXIIZ0LBxswTChDhnMkHElNxnnwwpGRfQ0KB5PkOKEO9OEfQQDIPYz+SkIQAKAwTpj0ETYSHWMJPSbwKGTQtaWnHCZ2zWJAicJcHHXRdNVsc5fAI-cWVs0yZBohomhadplBdXoDRs3k7LNByBKmYSDHcsS4xTZdbEzYktyeTJ8VOIl8xcdV3AyckJRCFMEtYyhkr-PcAFF0qBCBWCsWBlBBChcA6AU6gACi1LQAEpWDypKCo4m9MDGujIzc4UFmHSDxXSVTMkCDwQjlJSWugigNXk5x7BJMJAkrPTts4Ia+NG8bIFYABxLAewIPgwLOzyLvjKlVPcOli2LJdOqVFriVJckcOpNdaWeAo9NIdA4EsP6wFE2GIOsOJiWcChHC8S5-GyLcchC2LGe2SKUVCdVvFCeLfuslkKnssZqYRcT4fWVwXA0kIZ0CHwcWzUsKBTfZN2w0tbGpfqiNZOgfhqaXzrphA-CCLZkfRKk3HJbwNalbwOtigJ3d8Y4jcMiWirGA7xotuGrdiTcmclNMrmeHIqVQwJVKCMlJ2SIsvCCH63hY433zIriZFD2nVhwxnPeRy4NQlElUL8JIEgSWc8X8fJRdzwz85PQvvwdJ0zRywNg2L2WrepBX7myQI-Bbh4FwNpIDbj44sR8F528Izv2I-S1uJ-XjGBvEe4x9zYK63TJS2yZrCQ2W3ecCZMnk3Vw-fykzJYwY+JI2Rm5zufYM5siHBdi1VU7sNQeCTJkFMmk347Q-oDLAh0miQG-vDJcjMfYeGOJpSB-hsxe18g4eSyZiTpkyG3AoQA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQAyquEZUmaGsAxBuRWQG6oDWlZljxEylGnQZN0qWAh6p8uAC7FUpANoAGALradiUAAdZxVesMgAHogCMAZgAsFewCYA7LfeuAHK4Bstv4ergA0IACeiAC0ThQ+9loAnI6uWgCsyfbp6UkAvnnhQjgEJJwS9KSMQmxgAE51qHUURgA2KgBmTQC2FMUiZeK0ldUycgpK5pq6+pYmsGZqpJY2CNHuzsGuto4+u-YbPrnhUQi2KRQBjg4+Gen+9m4+BUUyJaLlw5DSLKwAwnUwCowJgAHJgADusyQIHmiwsMNW2X8FHcyQcWge7n8GUcJzsjk26R2GVc6Q8-gSLxA-VKYmoXwgP1krAAImBWmBlGBocZTFMVoh-P4ki4kmSnKlbF43Pi1g8KFpHFofDidj49ul7M9CjS3gN6QCgaoqphyBDMMoZBQAMqEVAQqRdOrdTBkIwAV2UrAAYj03aRPcpMERcFVILzYfyloKEMEtIrHEl7NLXGkfBt0nKpaikjt7ML3MStNr0tTaR9KEaVFJzZbrXaHU7-e6vawbR6AEbdMyRuECxGIe6uS4bfwbWxaXxKsKRIfudzxWzk7yqpJ+Tzl-V0zjVk2MOtWjC23DcKRH1DsdSUBQCPrbysUPe1yH14820-nmTyUi8SZLfQ+2jBFQFWaVRWJBwPB8SdVQSOVMhHe4NkxbEnECVxHC3DB3kGJ9ARrU1DwbT9TQvVh6kaZo2k6Hp7xwg1dwI-czVfC8TzPMjvwmGt1EA3Q5mA5ZBzjcUXHSDUMncJIp0cbU5XjChEP8CTbi2Hx8l1Cs8PZTkWKEK9OFvQQHx0jkuSkIQfz-Xjpj0ASYX7GMRJg+wKCTOTKWuJUtCnOVolg1F3AzXx0gXbYUiwrTTPpXSLNNAzKKaFp2mUZ1em02LzP07jf0UWz+IMRyhNjZNFy8RxiV2Vw3BxPE5zOaSKBxLRPBU5cNKSZNsOEHdKDiliL0wABRBomkgVgrFgZRgQoXAOm5OoAAoyV8gBKVhMs4Aavxw0aqIjBy+QWAdQKHGClLVKdpPFFIfDlbZ0kVaTMWlQlXDzDIetwrK9N2rB9vGiBWAAcSwTsCD4ICTucs64zJJTgoLYVxwXaU5R2IkSXJFdKV8b7GKGSQErGQybzyu8tqJkZmXGPL-z4mZbCK474WEuGHCe5cIo8YkkYx3yKC6jMjik5N138ApdVIdA4EsKnBJhkDrBiHYUVsW5bCuXxqt2fzzhRNMM2ycVfPscUoteBi+oZYnRhYRW2djdYR2FCSuqnScHGxOUiyFx5pISfxHCLbmCZtipvhqR3TpVhBHBxRVEhVDIUmSaT-M2DYFySIs-GF8lw8fCpLLGEaxrqGPYbj6J1woDWtC14Odb8LMGpTBNchUhOUwLRukjLaLrcfZ8iLYmQq+V1ZlXV8VgoCVqJMJOVHmcJwdi1250neyWh96kfmJfC12MbR1TXSgMg0n9m4-JJCvMnJxt57hDlxcbnNRkwJtSLvDR4Pce75SKMAvNfWMlVnDnGggvPOy8GobFFEbScSY3DrlcL-X68V7aoDASJdczgEgyRyMmDIq9swolbmiT6q4aq2AwdtbK-1y4HQgLguGeYfBKUJMWRutwEEPU8IqQsGlUG7EJFLPIQA */
     states: {
       'Loading Todos': {
         invoke: {
           src: 'loadTodos',
 
-          onDone: {
-            actions: 'assignTodoToContext',
-            target: 'Loaded Todos',
-          },
+          onDone: [
+            {
+              actions: 'assignTodoToContext',
+              target: 'Loaded Todos',
+              cond: 'Has Todos',
+            },
+            'Creating new todo',
+          ],
 
           onError: {
             target: 'Loading Todos Error',
@@ -139,6 +143,11 @@ export const todoMachine = createMachine(
         };
       }),
     },
+    guards: {
+      'Has Todos': (context, event) => {
+        return event.data.length > 0;
+      },
+    },
   }
 );
 
@@ -147,3 +156,5 @@ export const todoMachine = createMachine(
 //Context is used to save the information to our Machine, Context is an object and it is like a key value store ,which stores any thing you need to store in your machine
 
 //Assign is used to asign the values to context
+
+//If Else Logic is handled by Guards in XState

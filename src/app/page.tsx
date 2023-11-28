@@ -2,14 +2,8 @@
 import React from 'react';
 import { useMachine } from '@xstate/react';
 import { todoMachine } from '../../machines/todoAppMachine';
-import { todo } from 'node:test';
-import { keys } from 'xstate/lib/utils';
 
-const todos = new Set<string>([
-  'Take Coffee',
-  'Do Task Login Task',
-  'Attend Meeting',
-]);
+const todos = new Set<string>([]);
 
 export default function Home() {
   const [state, send] = useMachine(todoMachine, {
@@ -21,7 +15,7 @@ export default function Home() {
         todos.add(context.createNewTodoFormInputs);
       },
       deleteTodo: async (context, event) => {
-        throw new Error('Error');
+        // throw new Error('Error');
         todos.delete(event.todo);
       },
     },
